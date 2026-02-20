@@ -37,7 +37,7 @@ function sweep(tag,vals)
     return [S₁,I₁,v₁,S₂,I₂,v₂]
 end
 
-theta1_vals = 0.0:0.00001:1.0
+theta1_vals = 0.0:0.00001:0.1
 theta1_sweep = sweep("θ₁",theta1_vals)
 sweep_theta1_p1 = plot(theta1_vals,[theta1_sweep[1],theta1_sweep[4]],label=[L"S_1" L"S_2"],xlabel=L"\theta_1",legend=:outerright)
 sweep_theta1_p2 = plot(theta1_vals,[theta1_sweep[2],theta1_sweep[5]],label=[L"I_1" L"I_2"],xlabel=L"\theta_1",legend=:outerright)
