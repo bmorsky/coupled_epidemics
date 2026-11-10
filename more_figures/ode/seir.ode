@@ -1,0 +1,17 @@
+p ben=0.4,eta=0.8,kap=1000
+p gm=0.1,de=0.2
+p eps=1,c=0.02,theta=0.01
+
+F(I,p)=BR(I,p)-p
+BR(I,p)=1/(1+exp(kap*(u(I,p,0)-u(I,p,1))))
+u(I,p,q)=um(I,q)+ur(p,q)
+um(p,q)=-be(q)*I-c*q
+ur(p,q)=-theta*(p-q)^2
+
+be(p)=ben*(1-eta*p)
+
+S'=-be(p)*S*I
+E'=be(p)*S*I - de*E
+I'=de*E-gm*I
+R'=gm*I
+p'=eps*F(I,p)

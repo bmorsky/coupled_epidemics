@@ -1,0 +1,20 @@
+p a=0, b=0, eps=.02
+TT=86.91035377395296
+s=TT/(2*pi)
+k=-0.032890098538026075
+h1p0(x)=1.2444+2*cos(x*1.0)*(-0.6401)+2*cos(x*2.0)*(0.0137)+2*cos(x*3.0)*(0.0048)
+h1p1(x)=2*cos(x*4.0)*(0.0040)+2*cos(x*6.0)*(-0.0018)+2*cos(x*7.0)*(-0.0017)-2*sin(x*1.0)*(-0.5035)
+h1p2(x)=-2*sin(x*2.0)*(-0.0646)-2*sin(x*3.0)*(-0.0255)-2*sin(x*4.0)*(-0.0037)-2*sin(x*5.0)*(0.0018)
+h1p3(x)=-2*sin(x*6.0)*(0.0013)
+h1(x)=h1p0(x)+h1p1(x)+h1p2(x)+h1p3(x)
+h7(x)=-0.5346
+# oscillator 0 (at phi)  carries heterogeneity delta
+# oscillator 1 (at -phi)
+
+phi'=s*(eps*(1-a)*h1(-phi)-eps*(1+a)*h1(phi)-b*h7(0))
+
+@ total=100,dt=0.02
+@ dsmax=.01,dsmin=1e-5,ds=.001
+@ parmin=-10,parmax=10
+
+d

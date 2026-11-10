@@ -1,0 +1,34 @@
+# weak coupling approximation of the seir2 model
+
+p al=0.01,be=0.5,gm=0.14285714285,eps=0.14285714285
+p tha=0.01,thb=0.01,kap=1000,rho=0.01,phi=0.5,psi=0.5
+
+f1(x)=1/(1+exp(-kap*x))
+f2(x)=kap*exp(-kap*x)/(1+exp(-kap*x))^2
+
+s1'=al*(psi-s1-i1) - be*s1*i1 - eps*v1*s1 - phi*be*s1*i2
+i1'=-gm*i1 + be*s1*i1 + phi*be*s1*i2 
+v1'=-v1 + f1(be*i1 - rho - tha*(1-2*v1)) + phi*be*i2*f2(be*i1 - rho - tha*(1-2*v1))
+
+s2'=al*(psi-s2-i2) - be*s2*i2 - eps*v2*S2 - phi*be*s2*i1
+i2'=-gm*i2 + be*s2*i2 + phi*be*s2*i1
+v2'=-v2 + f1(be*i2 - rho - thb*(1-2*v2)) + phi*be*i1*f2(be*i2 - rho - thb*(1-2*v2))
+
+s1(0)=0.49
+i1(0)=0.01
+v1(0)=0.01
+s2(0)=0.5
+i2(0)=0.0
+v2(0)=0.01
+
+fix(x)=(6+2*x)/(6-4*x+x^2)
+
+aux c1=-kap*(be*(I1+phi*i2) - rho - tha*(1-2*v1))
+aux c2=-kap*(be*(phi*i1+i2) - rho - thb*(1-2*v2))
+
+aux v1r=1/(1+exp(-kap*(be*(I1+phi*i2) - rho - tha*(1-2*v1))))
+aux v2r=1/(1+exp(-kap*(be*(phi*i1+i2) - rho - thb*(1-2*v2))))
+
+aux v1rapprox=heav(-kap*(be*(I1+phi*i2) - rho - tha*(1-2*v1)))
+
+@ total=1000
